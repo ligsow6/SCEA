@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Château Tour du Moulin — AOC Fronsac</title>
+  <meta name="description" content="Château Tour du Moulin, domaine viticole familial en AOC Fronsac depuis 5 générations. Saillans, Gironde — voisin de Pomerol et Saint-Émilion." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CUSTOM PROPERTIES ===== */
+    :root {
+      --bordeaux-tres-sombre: #1a0a00;
+      --bordeaux-profond: #2c0d0d;
+      --bordeaux-chaud: #7b2d2d;
+      --or-dore: #c9a96e;
+      --ivoire: #f5efe6;
+      --brun-sombre: #1f1208;
+
+      --font-titre: 'Playfair Display', serif;
+      --font-sous-titre: 'Cormorant Garamond', serif;
+      --font-corps: 'Lato', sans-serif;
+
+      --max-width: 1200px;
+      --nav-height: 80px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+    }
+
+    body {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      color: var(--ivoire);
+      background: var(--bordeaux-tres-sombre);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.25s; }
+    .reveal-delay-3 { transition-delay: 0.4s; }
+    .reveal-delay-4 { transition-delay: 0.55s; }
+
+    /* ===== SECTION DECORATIVE NUMBER ===== */
+    .section-number {
+      position: absolute;
+      top: -20px;
+      left: 2rem;
+      font-family: var(--font-titre);
+      font-size: clamp(8rem, 15vw, 16rem);
+      font-weight: 700;
+      color: var(--or-dore);
+      opacity: 0.04;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    /* ===== SECTION SEPARATOR ===== */
+    .section-sep {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem 0;
+    }
+    .section-sep::before,
+    .section-sep::after {
+      content: '';
+      height: 1px;
+      width: 80px;
+      background: var(--or-dore);
+      opacity: 0.4;
+    }
+    .section-sep svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--or-dore);
+      opacity: 0.5;
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      font-family: var(--font-titre);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--ivoire);
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--or-dore);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      background: rgba(26, 10, 0, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .nav-logo-name {
+      font-family: var(--font-titre);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ivoire);
+      letter-spacing: 0.5px;
+    }
+    .nav-logo-appellation {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--or-dore);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--font-corps);
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: var(--ivoire);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--or-dore);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--or-dore); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1100;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--ivoire);
+      transition: all 0.35s ease;
+      border-radius: 2px;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(165deg, var(--bordeaux-tres-sombre) 0%, #0d0503 40%, var(--bordeaux-profond) 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: 1;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--ivoire), transparent);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+      padding: 2rem;
+    }
+    .hero h1 {
+      font-family: var(--font-titre);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: var(--ivoire);
+      letter-spacing: 2px;
+      margin-bottom: 0.6rem;
+      opacity: 0;
+      animation: fadeInUp 1s 0.2s forwards;
+    }
+    .hero-appellation {
+      font-family: var(--font-sous-titre);
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--or-dore);
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s 0.5s forwards;
+    }
+    .hero-citation {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      color: rgba(245, 239, 230, 0.75);
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeInUp 1s 0.8s forwards;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeInUp 1s 1.1s forwards;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-family: var(--font-corps);
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all 0.35s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      border: 1px solid var(--or-dore);
+      color: var(--or-dore);
+      background: transparent;
+    }
+    .btn-primary:hover {
+      background: var(--or-dore);
+      color: var(--bordeaux-tres-sombre);
+    }
+    .btn-secondary {
+      border: 1px solid rgba(245, 239, 230, 0.3);
+      color: var(--ivoire);
+      background: transparent;
+    }
+    .btn-secondary:hover {
+      border-color: var(--or-dore);
+      color: var(--or-dore);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      opacity: 0;
+      animation: fadeInUp 1s 1.5s forwards;
+    }
+    .scroll-indicator span {
+      display: block;
+      width: 20px;
+      height: 32px;
+      border: 1.5px solid rgba(201, 169, 110, 0.5);
+      border-radius: 12px;
+      position: relative;
+    }
+    .scroll-indicator span::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 8px;
+      background: var(--or-dore);
+      border-radius: 3px;
+      animation: scrollBounce 2s infinite;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      50% { transform: translateX(-50%) translateY(10px); opacity: 0.3; }
+    }
+
+    /* ===== BANDEAU CHIFFRES ===== */
+    .stats-band {
+      background: var(--ivoire);
+      padding: 3.5rem 0;
+      position: relative;
+      z-index: 3;
+    }
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 200px;
+      max-width: 280px;
+      text-align: center;
+      padding: 1.5rem 1.8rem;
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: var(--or-dore);
+      opacity: 0.35;
+    }
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 0.8rem;
+    }
+    .stat-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--bordeaux-chaud);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .stat-number {
+      font-family: var(--font-titre);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--bordeaux-profond);
+      margin-bottom: 0.25rem;
+    }
+    .stat-label {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--bordeaux-chaud);
+    }
+
+    /* ===== HISTOIRE ===== */
+    .histoire {
+      background: var(--bordeaux-profond);
+      padding: 7rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .histoire-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .histoire-text p {
+      font-size: 1.05rem;
+      color: rgba(245, 239, 230, 0.85);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+    .histoire-portrait {
+      position: relative;
+    }
+    .portrait-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(145deg, var(--bordeaux-chaud), var(--brun-sombre));
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .portrait-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(201, 169, 110, 0.2);
+      border-radius: 2px;
+    }
+    .portrait-placeholder-text {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      color: rgba(245, 239, 230, 0.4);
+      font-size: 1rem;
+      text-align: center;
+      padding: 1rem;
+    }
+    .badge-oenologue {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201, 169, 110, 0.12);
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--or-dore);
+      margin-top: 0.5rem;
+    }
+
+    /* ===== VIGNOBLE ===== */
+    .vignoble {
+      background: var(--ivoire);
+      padding: 7rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .vignoble .section-title,
+    .vignoble .section-number { color: var(--bordeaux-profond); }
+    .vignoble .section-sep::before,
+    .vignoble .section-sep::after { background: var(--bordeaux-chaud); opacity: 0.25; }
+    .vignoble .section-sep svg { fill: var(--bordeaux-chaud); opacity: 0.4; }
+    .vignoble-intro {
+      max-width: 750px;
+      margin: 0 auto 3.5rem;
+      text-align: center;
+      font-size: 1.05rem;
+      color: rgba(31, 18, 8, 0.8);
+      line-height: 1.9;
+    }
+    .vignoble-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .vignoble-card {
+      background: #fff;
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 30px rgba(31, 18, 8, 0.06);
+      border: 1px solid rgba(201, 169, 110, 0.12);
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+    .vignoble-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(31, 18, 8, 0.12);
+    }
+    .vignoble-card-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1.2rem;
+    }
+    .vignoble-card-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--bordeaux-chaud);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .vignoble-card h3 {
+      font-family: var(--font-titre);
+      font-size: 1.2rem;
+      color: var(--bordeaux-profond);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+    .vignoble-card p {
+      font-size: 0.95rem;
+      color: rgba(31, 18, 8, 0.7);
+      line-height: 1.7;
+    }
+
+    /* ===== VINS ===== */
+    .vins {
+      background: var(--brun-sombre);
+      padding: 7rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .vins-medailles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+    .vin-card {
+      background: linear-gradient(170deg, rgba(44, 13, 13, 0.6), rgba(26, 10, 0, 0.8));
+      border: 1px solid rgba(201, 169, 110, 0.15);
+      border-radius: 4px;
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      position: relative;
+      transition: box-shadow 0.4s, border-color 0.4s;
+    }
+    .vin-card:hover {
+      box-shadow: 0 0 40px rgba(201, 169, 110, 0.12);
+      border-color: rgba(201, 169, 110, 0.35);
+    }
+    .medaille-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-titre);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .medaille-or {
+      background: linear-gradient(135deg, #d4a843, #f0d68a, #c9a96e);
+      color: var(--bordeaux-tres-sombre);
+    }
+    .medaille-argent {
+      background: linear-gradient(135deg, #a8a8a8, #d9d9d9, #b0b0b0);
+      color: var(--bordeaux-tres-sombre);
+    }
+    .vin-card .bottle-icon {
+      width: 36px;
+      height: 80px;
+      margin: 0 auto 1.2rem;
+    }
+    .vin-card .bottle-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--or-dore);
+      opacity: 0.35;
+    }
+    .vin-millesime {
+      font-family: var(--font-titre);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--ivoire);
+      margin-bottom: 0.3rem;
+    }
+    .vin-medaille-name {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--or-dore);
+      margin-bottom: 0.5rem;
+    }
+    .vin-concours {
+      font-size: 0.85rem;
+      color: rgba(245, 239, 230, 0.55);
+    }
+
+    /* Cuvée Éphémère */
+    .cuvee-section {
+      background: rgba(10, 5, 2, 0.5);
+      border-radius: 6px;
+      padding: 4rem 3rem;
+      margin-bottom: 5rem;
+      position: relative;
+      border: 1px solid rgba(201, 169, 110, 0.1);
+    }
+    .cuvee-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .cuvee-bottle-placeholder {
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 1/2.8;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(201, 169, 110, 0.06), rgba(123, 45, 45, 0.15));
+      border: 1px solid rgba(201, 169, 110, 0.12);
+      border-radius: 60px 60px 4px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cuvee-bottle-placeholder span {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      color: rgba(245, 239, 230, 0.25);
+      font-size: 0.9rem;
+      text-align: center;
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+    }
+    .cuvee-text h3 {
+      font-family: var(--font-titre);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--ivoire);
+      margin-bottom: 0.3rem;
+    }
+    .cuvee-text .cuvee-sub {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--or-dore);
+      margin-bottom: 1.5rem;
+    }
+    .cuvee-text p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(245, 239, 230, 0.8);
+      margin-bottom: 1.5rem;
+    }
+    .badge-limited {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--bordeaux-chaud), #a03333);
+      border: 1px solid var(--or-dore);
+      padding: 0.5rem 1.5rem;
+      border-radius: 2px;
+      font-family: var(--font-corps);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--or-dore);
+    }
+
+    /* Citations Presse */
+    .presse {
+      background: var(--bordeaux-chaud);
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .presse-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .presse-card {
+      padding: 2.5rem 2rem;
+      position: relative;
+      text-align: center;
+    }
+    .presse-card .quote-mark {
+      font-family: var(--font-titre);
+      font-size: 6rem;
+      color: var(--ivoire);
+      opacity: 0.12;
+      position: absolute;
+      top: 0;
+      left: 1rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .presse-card blockquote {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ivoire);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .presse-source {
+      font-family: var(--font-corps);
+      font-size: 0.85rem;
+      color: var(--or-dore);
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    /* ===== GALERIE ===== */
+    .galerie {
+      background: var(--bordeaux-profond);
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .galerie .section-title { text-align: center; }
+    .galerie .section-subtitle { text-align: center; }
+    .galerie-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .galerie-item {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--bordeaux-chaud), var(--brun-sombre));
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .galerie-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 10, 0, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.35s;
+    }
+    .galerie-item:hover::after {
+      background: rgba(26, 10, 0, 0.55);
+    }
+    .galerie-item .loupe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      z-index: 2;
+      opacity: 0;
+      transition: all 0.35s;
+    }
+    .galerie-item:hover .loupe {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .galerie-item .loupe svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--ivoire);
+      fill: none;
+      stroke-width: 2;
+    }
+    .galerie-rdv {
+      text-align: center;
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--or-dore);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: var(--brun-sombre);
+      padding: 7rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .contact-info h3 {
+      font-family: var(--font-titre);
+      font-size: 1.5rem;
+      color: var(--ivoire);
+      margin-bottom: 2rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-detail-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--or-dore);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .contact-detail-text {
+      font-size: 0.95rem;
+      color: rgba(245, 239, 230, 0.8);
+    }
+    .contact-detail-text a {
+      color: var(--or-dore);
+      transition: opacity 0.3s;
+    }
+    .contact-detail-text a:hover { opacity: 0.7; }
+    .contact-note {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: rgba(245, 239, 230, 0.5);
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(201, 169, 110, 0.15);
+    }
+
+    /* Form */
+    .contact-form h3 {
+      font-family: var(--font-titre);
+      font-size: 1.5rem;
+      color: var(--ivoire);
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      border-radius: 2px;
+      padding: 1rem 1rem 0.6rem;
+      font-family: var(--font-corps);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--ivoire);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--or-dore);
+    }
+    .form-group label {
+      position: absolute;
+      left: 1rem;
+      top: 0.8rem;
+      font-size: 0.9rem;
+      color: rgba(245, 239, 230, 0.45);
+      pointer-events: none;
+      transition: all 0.25s ease;
+      font-family: var(--font-corps);
+    }
+    .form-group input:focus ~ label,
+    .form-group input:not(:placeholder-shown) ~ label,
+    .form-group textarea:focus ~ label,
+    .form-group textarea:not(:placeholder-shown) ~ label {
+      top: -0.6rem;
+      left: 0.6rem;
+      font-size: 0.72rem;
+      color: var(--or-dore);
+      background: var(--brun-sombre);
+      padding: 0 0.3rem;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: transparent;
+      border: 1px solid var(--or-dore);
+      color: var(--or-dore);
+      font-family: var(--font-corps);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.35s;
+    }
+    .btn-submit:hover {
+      background: var(--or-dore);
+      color: var(--bordeaux-tres-sombre);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--bordeaux-tres-sombre);
+      padding: 3.5rem 0 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(201, 169, 110, 0.12);
+    }
+    .footer-logo {
+      font-family: var(--font-titre);
+      font-size: 1.3rem;
+      color: var(--ivoire);
+      margin-bottom: 0.2rem;
+    }
+    .footer-appellation {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--or-dore);
+      margin-bottom: 1.5rem;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(245, 239, 230, 0.6);
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--or-dore); }
+    .footer-notice {
+      font-size: 0.8rem;
+      color: rgba(245, 239, 230, 0.35);
+      margin-bottom: 0.5rem;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(245, 239, 230, 0.25);
+    }
+
+    /* ===== MOBILE NAV OVERLAY ===== */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 10, 0, 0.96);
+      z-index: 1050;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .nav-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .nav-overlay ul {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .nav-overlay a {
+      font-family: var(--font-titre);
+      font-size: 1.6rem;
+      color: var(--ivoire);
+      letter-spacing: 2px;
+      transition: color 0.3s;
+    }
+    .nav-overlay a:hover { color: var(--or-dore); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .histoire-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .histoire-portrait { order: -1; max-width: 400px; margin: 0 auto; }
+      .vignoble-cards { grid-template-columns: 1fr 1fr; }
+      .vins-medailles { grid-template-columns: 1fr 1fr; }
+      .cuvee-grid { grid-template-columns: 1fr; }
+      .cuvee-bottle-placeholder { max-width: 200px; margin-bottom: 1rem; }
+      .presse-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      :root { --nav-height: 64px; }
+
+      .hamburger { display: flex; }
+      .nav-links { display: none; }
+
+      .hero-btns { flex-direction: column; align-items: center; }
+
+      .stats-grid { flex-direction: column; align-items: center; }
+      .stat-item:not(:last-child)::after { display: none; }
+      .stat-item { border-bottom: 1px solid rgba(201, 169, 110, 0.15); padding-bottom: 1.5rem; margin-bottom: 1rem; }
+      .stat-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+      .vignoble-cards { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+
+      .vins-medailles { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto 4rem; }
+
+      .cuvee-section { padding: 2.5rem 1.5rem; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .galerie-grid { grid-template-columns: 1fr; }
+
+      .section-number { font-size: 6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" role="navigation" aria-label="Navigation principale">
+    <div class="container">
+      <a href="#" class="nav-logo" aria-label="Château Tour du Moulin — Accueil">
+        <span class="nav-logo-name">Château Tour du Moulin</span>
+        <span class="nav-logo-appellation">AOC Fronsac</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#histoire">Notre Histoire</a></li>
+        <li><a href="#vignoble">Le Vignoble</a></li>
+        <li><a href="#vins">Nos Vins</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile overlay -->
+  <div class="nav-overlay" aria-hidden="true">
+    <ul>
+      <li><a href="#histoire">Notre Histoire</a></li>
+      <li><a href="#vignoble">Le Vignoble</a></li>
+      <li><a href="#vins">Nos Vins</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Château Tour du Moulin</h1>
+      <p class="hero-appellation">AOC Fronsac — Domaine familial depuis 5 générations</p>
+      <p class="hero-citation">«&nbsp;C'est dans un souci constant de s'améliorer vers un produit sans cesse perfectionné que le Château Tour du Moulin inscrit son avenir.&nbsp;»</p>
+      <div class="hero-btns">
+        <a href="#histoire" class="btn btn-primary" aria-label="Découvrir le domaine">Découvrir le domaine</a>
+        <a href="#contact" class="btn btn-secondary" aria-label="Nous contacter">Nous contacter</a>
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span></span>
+    </div>
+  </header>
+
+  <!-- ===== BANDEAU CHIFFRES ===== -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Générations de vignerons</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="stat-number">AOC Fronsac</div>
+          <div class="stat-label">Terroir d'exception</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 14v4"/></svg>
+          </div>
+          <div class="stat-number">3 médailles</div>
+          <div class="stat-label">Aux grands concours</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="stat-number">Saillans</div>
+          <div class="stat-label">Voisin de Pomerol &amp; Saint-Émilion</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEPARATEUR ===== -->
+  <div class="section-sep" style="background:var(--bordeaux-profond);padding:1rem 0;">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12zm0 18c-3.3 0-6-2.7-6-6 0-2.6 2.3-5.7 6-9.7 3.7 4 6 7.1 6 9.7 0 3.3-2.7 6-6 6z"/></svg>
+  </div>
+
+  <!-- ===== NOTRE HISTOIRE ===== -->
+  <section class="histoire" id="histoire">
+    <div class="section-number" aria-hidden="true">01</div>
+    <div class="container">
+      <div class="reveal">
+        <p class="section-subtitle">L'héritage familial</p>
+        <h2 class="section-title">Notre Histoire</h2>
+      </div>
+      <div class="histoire-grid">
+        <div class="histoire-text reveal reveal-delay-1">
+          <p>Situé au cœur du vignoble du Fronsac et voisin des Appellations Pomerol et Saint-Émilion, le Château Tour du Moulin est un ancien domaine familial. Consultant pour des propriétés prestigieuses, Vincent Dupuch exerce pleinement sa passion pour son vin et ne cesse d'améliorer la qualité de ce cru, comme il le fait pour d'autres propriétés.</p>
+          <p>Les méthodes de culture sont à la fois traditionnelles et novatrices. Traditionnelles car tout est fait dans le respect du patrimoine et des terroirs. Novatrices, car chaque parcelle fait l'objet d'un suivi particulier tout au long de l'année permettant d'adapter au plus juste les façons culturales.</p>
+          <p>Nous développons également une agriculture de conservation des sols associée à une amélioration de la biodiversité de la faune et de flore. La conservation des haies ainsi que des talus inscrit le vignoble Tour du Moulin dans des paysages avec du caractère.</p>
+          <div class="badge-oenologue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2h8l-2 7H10L8 2z"/><path d="M10 9v6c0 2 2 4 2 4s2-2 2-4V9"/><line x1="7" y1="22" x2="17" y2="22"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+            Œnologue — 5 générations
+          </div>
+        </div>
+        <div class="histoire-portrait reveal reveal-delay-2">
+          <div class="portrait-placeholder">
+            <span class="portrait-placeholder-text">Portrait de<br>Vincent Dupuch<br><em>Vigneron &amp; Œnologue</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEPARATEUR ===== -->
+  <div class="section-sep" style="background:var(--ivoire);padding:1rem 0;">
+    <svg viewBox="0 0 24 24" style="fill:var(--bordeaux-chaud);opacity:0.3;"><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12zm0 18c-3.3 0-6-2.7-6-6 0-2.6 2.3-5.7 6-9.7 3.7 4 6 7.1 6 9.7 0 3.3-2.7 6-6 6z"/></svg>
+  </div>
+
+  <!-- ===== LE VIGNOBLE ===== -->
+  <section class="vignoble" id="vignoble">
+    <div class="section-number" aria-hidden="true">02</div>
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <p class="section-subtitle" style="color:var(--bordeaux-chaud);">Un terroir unique</p>
+        <h2 class="section-title">Le Vignoble</h2>
+      </div>
+      <p class="vignoble-intro reveal reveal-delay-1">Découvrez notre magnifique vignoble, riche d'une histoire ancestrale datant du 18ème siècle. Nos parcelles en pentes soigneusement entretenues offrent un paysage à couper le souffle. Vous pourrez également admirer nos fontaines naturelles et les anciennes carrières qui ont servi à extraire la pierre pour bâtir des maisons. Ici, chaque coin raconte une histoire et invite à l'exploration.</p>
+      <div class="vignoble-cards">
+        <div class="vignoble-card reveal reveal-delay-1">
+          <div class="vignoble-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22V8"/><path d="M5 12l7-10 7 10"/><path d="M3 17l9-5 9 5"/></svg>
+          </div>
+          <h3>Parcelles en pentes</h3>
+          <p>Non-mécanisables, travaillées entièrement à la main. Une singularité du terroir qui confère aux vins leur caractère unique et leur profondeur.</p>
+        </div>
+        <div class="vignoble-card reveal reveal-delay-2">
+          <div class="vignoble-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12z"/><path d="M8 14c0 2.2 1.8 4 4 4"/></svg>
+          </div>
+          <h3>Fontaines naturelles</h3>
+          <p>Ressource précieuse au cœur du domaine, ces sources contribuent à la biodiversité préservée de notre écosystème viticole.</p>
+        </div>
+        <div class="vignoble-card reveal reveal-delay-3">
+          <div class="vignoble-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="14" rx="1"/><path d="M3 12h18"/><path d="M3 16h18"/><path d="M7 8V4"/><path d="M12 8V2"/><path d="M17 8V4"/></svg>
+          </div>
+          <h3>Galeries historiques</h3>
+          <p>Anciennes carrières du 18e siècle, patrimoine de pierre remarquable témoignant de l'histoire ancienne de notre terroir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEPARATEUR ===== -->
+  <div class="section-sep" style="background:var(--brun-sombre);padding:1rem 0;">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12zm0 18c-3.3 0-6-2.7-6-6 0-2.6 2.3-5.7 6-9.7 3.7 4 6 7.1 6 9.7 0 3.3-2.7 6-6 6z"/></svg>
+  </div>
+
+  <!-- ===== NOS VINS ===== -->
+  <section class="vins" id="vins">
+    <div class="section-number" aria-hidden="true">03</div>
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <p class="section-subtitle">L'excellence en bouteille</p>
+        <h2 class="section-title">Nos Vins</h2>
+      </div>
+
+      <!-- Médailles -->
+      <div class="vins-medailles">
+        <div class="vin-card reveal reveal-delay-1">
+          <div class="medaille-badge medaille-argent">Argent</div>
+          <div class="bottle-icon">
+            <svg viewBox="0 0 36 80"><rect x="14" y="0" width="8" height="14" rx="2"/><rect x="12" y="14" width="12" height="4" rx="1"/><path d="M12 18 C8 26 6 34 6 40 L6 74 C6 77 8.5 79 12 79 L24 79 C27.5 79 30 77 30 74 L30 40 C30 34 28 26 24 18Z"/></svg>
+          </div>
+          <div class="vin-millesime">2015</div>
+          <div class="vin-medaille-name">Médaille d'Argent</div>
+          <div class="vin-concours">Concours Mondial de Bruxelles 2018</div>
+        </div>
+        <div class="vin-card reveal reveal-delay-2">
+          <div class="medaille-badge medaille-or">Or</div>
+          <div class="bottle-icon">
+            <svg viewBox="0 0 36 80"><rect x="14" y="0" width="8" height="14" rx="2"/><rect x="12" y="14" width="12" height="4" rx="1"/><path d="M12 18 C8 26 6 34 6 40 L6 74 C6 77 8.5 79 12 79 L24 79 C27.5 79 30 77 30 74 L30 40 C30 34 28 26 24 18Z"/></svg>
+          </div>
+          <div class="vin-millesime">2016</div>
+          <div class="vin-medaille-name">Médaille d'Or</div>
+          <div class="vin-concours">Concours de Bordeaux — Vins d'Aquitaine 2018</div>
+        </div>
+        <div class="vin-card reveal reveal-delay-3">
+          <div class="medaille-badge medaille-or">Or</div>
+          <div class="bottle-icon">
+            <svg viewBox="0 0 36 80"><rect x="14" y="0" width="8" height="14" rx="2"/><rect x="12" y="14" width="12" height="4" rx="1"/><path d="M12 18 C8 26 6 34 6 40 L6 74 C6 77 8.5 79 12 79 L24 79 C27.5 79 30 77 30 74 L30 40 C30 34 28 26 24 18Z"/></svg>
+          </div>
+          <div class="vin-millesime">2017</div>
+          <div class="vin-medaille-name">Médaille d'Or</div>
+          <div class="vin-concours">Concours de Bordeaux — Vins d'Aquitaine 2019</div>
+        </div>
+      </div>
+
+      <!-- Cuvée Éphémère -->
+      <div class="cuvee-section reveal">
+        <div class="cuvee-grid">
+          <div class="cuvee-bottle-placeholder">
+            <span>Nouvelle Partition — 2019</span>
+          </div>
+          <div class="cuvee-text">
+            <h3>Nouvelle Partition</h3>
+            <p class="cuvee-sub">Cuvée Éphémère — Millésime 2019</p>
+            <p>Une autre approche des cépages dans la construction du vin pour Fronsac. Ici, que du Cabernet Franc, du Cabernet Sauvignon et du Petit Verdot. Pas de Merlot. Les raisins sont récoltés à la main, assemblés pour être vinifiés ensemble dans la même cuve.</p>
+            <p>Une vinification douce à basse température. Élevage de 18 mois en fût de chêne de 400L. <strong>Production limitée à 1000 exemplaires.</strong></p>
+            <div class="badge-limited">Édition limitée — 1000 exemplaires</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citations Presse -->
+  <section class="presse">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:2.5rem;">
+        <p class="section-subtitle">Ce que la presse en dit</p>
+        <h2 class="section-title">Revue de Presse</h2>
+      </div>
+      <div class="presse-grid">
+        <div class="presse-card reveal reveal-delay-1">
+          <span class="quote-mark" aria-hidden="true">"</span>
+          <blockquote>«&nbsp;Ce challenger bordelais surclasse les ¾ du vignoble avec ce 2019 bluffant.&nbsp;»</blockquote>
+          <div class="presse-source">— QoQa</div>
+        </div>
+        <div class="presse-card reveal reveal-delay-2">
+          <span class="quote-mark" aria-hidden="true">"</span>
+          <blockquote>«&nbsp;Cuvée notée 94/100 par notre Comité !&nbsp;»</blockquote>
+          <div class="presse-source">— Vente à la Propriété</div>
+        </div>
+        <div class="presse-card reveal reveal-delay-3">
+          <span class="quote-mark" aria-hidden="true">"</span>
+          <blockquote>«&nbsp;Un Fronsac au regard noir… bouquet séduisant marqué par les fruits noirs confits. Du charme et du potentiel.&nbsp;»</blockquote>
+          <div class="presse-source">— Guide Hachette des Vins 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEPARATEUR ===== -->
+  <div class="section-sep" style="background:var(--bordeaux-profond);padding:1rem 0;">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12zm0 18c-3.3 0-6-2.7-6-6 0-2.6 2.3-5.7 6-9.7 3.7 4 6 7.1 6 9.7 0 3.3-2.7 6-6 6z"/></svg>
+  </div>
+
+  <!-- ===== GALERIE ===== -->
+  <section class="galerie">
+    <div class="section-number" aria-hidden="true">04</div>
+    <div class="container">
+      <div class="reveal">
+        <p class="section-subtitle" style="text-align:center;">Immersion au domaine</p>
+        <h2 class="section-title" style="text-align:center;">Galerie</h2>
+      </div>
+      <div class="galerie-grid">
+        <div class="galerie-item reveal reveal-delay-1" aria-label="Photo du domaine 1">
+          <div class="loupe"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="galerie-item reveal reveal-delay-1" style="background:linear-gradient(135deg,#4a1a1a,var(--brun-sombre));" aria-label="Photo du vignoble">
+          <div class="loupe"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="galerie-item reveal reveal-delay-2" style="background:linear-gradient(135deg,var(--bordeaux-profond),#3d1515);" aria-label="Photo des vignes">
+          <div class="loupe"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="galerie-item reveal reveal-delay-2" style="background:linear-gradient(135deg,#2a1008,var(--bordeaux-chaud));" aria-label="Photo du chai">
+          <div class="loupe"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="galerie-item reveal reveal-delay-3" style="background:linear-gradient(135deg,#1a0800,#4a2020);" aria-label="Photo des barriques">
+          <div class="loupe"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="galerie-item reveal reveal-delay-3" style="background:linear-gradient(135deg,var(--bordeaux-chaud),var(--bordeaux-tres-sombre));" aria-label="Photo de la propriété">
+          <div class="loupe"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+      </div>
+      <p class="galerie-rdv reveal">Visitez notre domaine sur rendez-vous</p>
+    </div>
+  </section>
+
+  <!-- ===== SEPARATEUR ===== -->
+  <div class="section-sep" style="background:var(--brun-sombre);padding:1rem 0;">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12zm0 18c-3.3 0-6-2.7-6-6 0-2.6 2.3-5.7 6-9.7 3.7 4 6 7.1 6 9.7 0 3.3-2.7 6-6 6z"/></svg>
+  </div>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="section-number" aria-hidden="true">05</div>
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <p class="section-subtitle">Prenons rendez-vous</p>
+        <h2 class="section-title">Contact</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal reveal-delay-1">
+          <h3>Nous retrouver</h3>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <a href="mailto:chateau-tour-du-moulin@orange.fr">chateau-tour-du-moulin@orange.fr</a>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <a href="tel:+33557743426">05 57 74 34 26</a>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              2 Le Moulin, 33141 Saillans<br>Gironde, France
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              Visites sur rendez-vous uniquement
+            </div>
+          </div>
+          <p class="contact-note">Site non commercial — Pas de vente de vins sur ce site.<br>Pour toute commande, merci de nous contacter directement.</p>
+        </div>
+        <div class="contact-form reveal reveal-delay-2">
+          <h3>Écrivez-nous</h3>
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" id="prenom" name="prenom" placeholder=" " required />
+                <label for="prenom">Prénom</label>
+              </div>
+              <div class="form-group">
+                <input type="text" id="nom" name="nom" placeholder=" " required />
+                <label for="nom">Nom</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder=" " required />
+              <label for="email">Email</label>
+            </div>
+            <div class="form-group">
+              <input type="text" id="objet" name="objet" placeholder=" " />
+              <label for="objet">Objet</label>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" placeholder=" " required></textarea>
+              <label for="message">Votre message</label>
+            </div>
+            <button type="submit" class="btn-submit" aria-label="Envoyer le message">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Château Tour du Moulin</div>
+      <div class="footer-appellation">AOC Fronsac</div>
+      <nav class="footer-links" aria-label="Liens du pied de page">
+        <a href="#histoire">Notre Histoire</a>
+        <a href="#vignoble">Le Vignoble</a>
+        <a href="#vins">Nos Vins</a>
+        <a href="#contact">Contact</a>
+        <a href="#" aria-label="Mentions légales">Mentions légales</a>
+      </nav>
+      <p class="footer-notice">Site non commercial — Pas de vente de vins sur ce site</p>
+      <p class="footer-copy">© 2024 Château Tour du Moulin — Saillans, Gironde</p>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    /* ----- HAMBURGER MENU ----- */
+    const hamburger = document.querySelector('.hamburger');
+    const overlay = document.querySelector('.nav-overlay');
+    const overlayLinks = overlay.querySelectorAll('a');
+
+    function toggleMenu() {
+      const isOpen = hamburger.classList.toggle('active');
+      overlay.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      overlay.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    overlayLinks.forEach(link => link.addEventListener('click', () => {
+      if (overlay.classList.contains('open')) toggleMenu();
+    }));
+
+    /* ----- NAVBAR SCROLL EFFECT ----- */
+    const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > 100) {
+        navbar.style.background = 'rgba(26, 10, 0, 0.96)';
+      } else {
+        navbar.style.background = 'rgba(26, 10, 0, 0.88)';
+      }
+      lastScroll = current;
+    }, { passive: true });
+
+    /* ----- SCROLL REVEAL (IntersectionObserver) ----- */
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* ----- ACTIVE NAV LINK ----- */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.style.color = link.getAttribute('href') === '#' + id
+              ? 'var(--or-dore)' : '';
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => sectionObserver.observe(s));
+
+    /* ----- FORM HANDLING ----- */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-submit');
+      const originalText = btn.textContent;
+      btn.textContent = 'Message envoyé !';
+      btn.style.background = 'var(--or-dore)';
+      btn.style.color = 'var(--bordeaux-tres-sombre)';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+        this.reset();
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
