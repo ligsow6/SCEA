@@ -45,6 +45,207 @@
       background: var(--bordeaux-tres-sombre);
       line-height: 1.7;
       overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ===== PRELOADER ===== */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--bordeaux-tres-sombre);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .preloader-logo {
+      font-family: var(--font-titre);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--ivoire);
+      letter-spacing: 2px;
+      margin-bottom: 0.4rem;
+      opacity: 0;
+      animation: preloaderFadeIn 0.8s 0.2s forwards;
+    }
+    .preloader-sub {
+      font-family: var(--font-sous-titre);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--or-dore);
+      opacity: 0;
+      animation: preloaderFadeIn 0.8s 0.5s forwards;
+    }
+    .preloader-bar {
+      width: 120px;
+      height: 1px;
+      background: rgba(201, 169, 110, 0.2);
+      margin-top: 2rem;
+      border-radius: 2px;
+      overflow: hidden;
+      opacity: 0;
+      animation: preloaderFadeIn 0.8s 0.7s forwards;
+    }
+    .preloader-bar-inner {
+      width: 0;
+      height: 100%;
+      background: var(--or-dore);
+      animation: preloaderProgress 1.8s 0.8s ease-in-out forwards;
+    }
+    @keyframes preloaderFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes preloaderProgress {
+      0%   { width: 0; }
+      100% { width: 100%; }
+    }
+
+    /* ===== CUSTOM CURSOR ===== */
+    .cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background: var(--or-dore);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transition: transform 0.15s ease, opacity 0.3s;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(201, 169, 110, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transition: transform 0.08s ease, width 0.3s, height 0.3s, border-color 0.3s;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-dot.hovering {
+      transform: translate(-50%, -50%) scale(2.5);
+      background: rgba(201, 169, 110, 0.6);
+    }
+    .cursor-ring.hovering {
+      width: 50px;
+      height: 50px;
+      border-color: var(--or-dore);
+    }
+    @media (max-width: 768px), (pointer: coarse) {
+      .cursor-dot, .cursor-ring { display: none !important; }
+      body { cursor: auto; }
+    }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(201, 169, 110, 0.15);
+      border: 1px solid rgba(201, 169, 110, 0.35);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 900;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      pointer-events: none;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .back-to-top:hover {
+      background: var(--or-dore);
+      border-color: var(--or-dore);
+    }
+    .back-to-top svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--or-dore);
+      fill: none;
+      stroke-width: 2;
+      transition: stroke 0.3s;
+    }
+    .back-to-top:hover svg {
+      stroke: var(--bordeaux-tres-sombre);
+    }
+
+    /* ===== PARALLAX LAYERS ===== */
+    .parallax-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .parallax-bg {
+      position: absolute;
+      inset: -80px 0;
+      z-index: 0;
+      will-change: transform;
+      pointer-events: none;
+    }
+    .parallax-section > .container,
+    .parallax-section > .section-number {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== RIPPLE EFFECT ON BUTTONS ===== */
+    .btn, .btn-submit {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn .ripple, .btn-submit .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(201, 169, 110, 0.35);
+      transform: scale(0);
+      animation: rippleAnim 0.6s ease-out;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* ===== FLOATING PARTICLES (Hero) ===== */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--or-dore);
+      border-radius: 50%;
+      opacity: 0;
+      animation: floatParticle linear infinite;
+    }
+    @keyframes floatParticle {
+      0%   { opacity: 0; transform: translateY(100vh) scale(0); }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-20vh) scale(1); }
     }
 
     img { max-width: 100%; display: block; }
@@ -1066,6 +1267,22 @@
 </head>
 <body>
 
+  <!-- ===== PRELOADER ===== -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-logo">Château Tour du Moulin</div>
+    <div class="preloader-sub">AOC Fronsac</div>
+    <div class="preloader-bar"><div class="preloader-bar-inner"></div></div>
+  </div>
+
+  <!-- ===== CUSTOM CURSOR ===== -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ===== BACK TO TOP ===== -->
+  <button class="back-to-top" id="backToTop" aria-label="Retour en haut de page">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" role="navigation" aria-label="Navigation principale">
     <div class="container">
@@ -1099,6 +1316,8 @@
 
   <!-- ===== HERO ===== -->
   <header class="hero">
+    <!-- Floating particles -->
+    <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
     <div class="hero-content">
       <h1>Château Tour du Moulin</h1>
       <p class="hero-appellation">AOC Fronsac — Domaine familial depuis 5 générations</p>
@@ -1121,7 +1340,7 @@
           <div class="stat-icon">
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <div class="stat-number">5+</div>
+          <div class="stat-number" data-target="5" data-suffix="+">0</div>
           <div class="stat-label">Générations de vignerons</div>
         </div>
         <div class="stat-item reveal reveal-delay-1">
@@ -1135,7 +1354,7 @@
           <div class="stat-icon">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 14v4"/></svg>
           </div>
-          <div class="stat-number">3 médailles</div>
+          <div class="stat-number" data-target="3" data-suffix=" médailles">0</div>
           <div class="stat-label">Aux grands concours</div>
         </div>
         <div class="stat-item reveal reveal-delay-3">
@@ -1155,7 +1374,8 @@
   </div>
 
   <!-- ===== NOTRE HISTOIRE ===== -->
-  <section class="histoire" id="histoire">
+  <section class="histoire parallax-section" id="histoire">
+    <div class="parallax-bg" style="background:radial-gradient(ellipse at 30% 20%, rgba(123,45,45,0.15), transparent 70%);"></div>
     <div class="section-number" aria-hidden="true">01</div>
     <div class="container">
       <div class="reveal">
@@ -1187,7 +1407,8 @@
   </div>
 
   <!-- ===== LE VIGNOBLE ===== -->
-  <section class="vignoble" id="vignoble">
+  <section class="vignoble parallax-section" id="vignoble">
+    <div class="parallax-bg" style="background:radial-gradient(ellipse at 70% 80%, rgba(201,169,110,0.08), transparent 60%);"></div>
     <div class="section-number" aria-hidden="true">02</div>
     <div class="container">
       <div class="reveal" style="text-align:center;">
@@ -1227,7 +1448,8 @@
   </div>
 
   <!-- ===== NOS VINS ===== -->
-  <section class="vins" id="vins">
+  <section class="vins parallax-section" id="vins">
+    <div class="parallax-bg" style="background:radial-gradient(ellipse at 50% 30%, rgba(123,45,45,0.12), transparent 65%);"></div>
     <div class="section-number" aria-hidden="true">03</div>
     <div class="container">
       <div class="reveal" style="text-align:center;">
@@ -1354,7 +1576,8 @@
   </div>
 
   <!-- ===== CONTACT ===== -->
-  <section class="contact" id="contact">
+  <section class="contact parallax-section" id="contact">
+    <div class="parallax-bg" style="background:radial-gradient(ellipse at 20% 70%, rgba(201,169,110,0.06), transparent 55%);"></div>
     <div class="section-number" aria-hidden="true">05</div>
     <div class="container">
       <div class="reveal" style="text-align:center;">
@@ -1449,6 +1672,144 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
+    /* ----- PRELOADER ----- */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 2800);
+    });
+    document.body.style.overflow = 'hidden';
+
+    /* ----- CUSTOM CURSOR ----- */
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    // Only enable custom cursor on non-touch devices
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      // Hover effect on interactive elements
+      const hoverTargets = document.querySelectorAll('a, button, .btn, .btn-submit, .vignoble-card, .vin-card, .galerie-item, input, textarea');
+      hoverTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorDot.classList.add('hovering');
+          cursorRing.classList.add('hovering');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorDot.classList.remove('hovering');
+          cursorRing.classList.remove('hovering');
+        });
+      });
+    } else {
+      cursorDot.style.display = 'none';
+      cursorRing.style.display = 'none';
+    }
+
+    /* ----- RIPPLE EFFECT ON BUTTONS ----- */
+    document.querySelectorAll('.btn, .btn-submit').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        this.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+      });
+    });
+
+    /* ----- BACK TO TOP ----- */
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }, { passive: true });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ----- HERO FLOATING PARTICLES ----- */
+    const particlesContainer = document.getElementById('heroParticles');
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = p.style.height = (Math.random() * 3 + 1.5) + 'px';
+      p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      p.style.animationDelay = (Math.random() * 8) + 's';
+      particlesContainer.appendChild(p);
+    }
+
+    /* ----- PARALLAX EFFECT ----- */
+    const parallaxSections = document.querySelectorAll('.parallax-section');
+    function handleParallax() {
+      parallaxSections.forEach(section => {
+        const bg = section.querySelector('.parallax-bg');
+        if (!bg) return;
+        const rect = section.getBoundingClientRect();
+        const speed = 0.3;
+        const yPos = -(rect.top * speed);
+        bg.style.transform = 'translateY(' + yPos + 'px)';
+      });
+    }
+    window.addEventListener('scroll', handleParallax, { passive: true });
+    handleParallax();
+
+    /* ----- ANIMATED COUNTERS ----- */
+    function animateCounter(el, target, suffix, duration) {
+      let start = 0;
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(ease * target);
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target + suffix;
+      }
+      requestAnimationFrame(update);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          if (!isNaN(target)) {
+            animateCounter(el, target, suffix, 2000);
+          }
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
     /* ----- HAMBURGER MENU ----- */
     const hamburger = document.querySelector('.hamburger');
     const overlay = document.querySelector('.nav-overlay');
